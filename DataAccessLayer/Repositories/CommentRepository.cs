@@ -30,7 +30,7 @@ namespace DataAccessLayer.Repositories
             throw new NotImplementedException();
         }
 
-        public void Udate(Comment t)
+        public void Update(Comment t)
         {
             throw new NotImplementedException();
         }
