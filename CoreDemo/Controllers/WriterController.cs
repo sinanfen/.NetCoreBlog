@@ -9,8 +9,22 @@ namespace CoreDemo.Controllers
 {
     public class WriterController : Controller
     {
-        [AllowAnonymous]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult WriterProfile()
+        {
+            return View();
+        }
+
+        public IActionResult WriterMail()
+        {
+            return View();
+        }
+
+        public IActionResult Test()
         {
             return View();
         }
