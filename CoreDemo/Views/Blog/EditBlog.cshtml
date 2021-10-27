@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "EditBlog";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Blog İçeriği</h4>
+            <p class="card-description">  Blog Düzenle </p>
+            @using (Html.BeginForm("EditBlog", "Blog", FormMethod.Post))
+            {
+                @Html.HiddenFor(x=>x.BlogID)
+                <div class="form-group">
+                    <label for="exampleInputName1">Blog Başlığı</label>
+                    @Html.TextBoxFor(x => x.BlogTittle, new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(x => x.BlogTittle, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Blog Görseli</label>
+                    @Html.TextBoxFor(x => x.BlogImage, new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(x => x.BlogImage, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Blog Thumbnail Url</label>
+                    @Html.TextBoxFor(x => x.BlogThumbnailImage, new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(x => x.BlogThumbnailImage, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Kategori</label>
+                    @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.cateValues, "-Kategori Seçiniz-", new { @class = "form-control", @required = "required" })
+                    @*@Html.ValidationMessageFor(x => x.CategoryID, "", new { @class = "text-danger" })*@
+                </div>
+                @*<div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    <label for="exampleTextarea1">Blog İçeriği</label>
+                    @Html.TextAreaFor(x => x.BlogContent, 20, 4, new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })*@
+                </div>
+                <button class="btn btn-gradient-primary mr-2">Güncelle</button>
+                <a href="/Blog/BlogListByWriter/" class="btn btn-light">Vazgeç</a>
+            }
+        </div>
+    </div>
+</div>

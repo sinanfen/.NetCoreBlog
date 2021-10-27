@@ -1,0 +1,93 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<link href="~/writer/assets/css/SweetAlert2.css" rel="stylesheet" />
+<script src="~/writer/assets/js/SweetAlert2.js"></script>
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Bloglarım</h4>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Başlık</th>
+                                <th>Oluşturma Tarihi</th>
+                                <th>Kategori</th>
+                                <th>Durum</th>
+                                <th>Eylem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th>@item.BlogID</th>
+                                    <td>@item.BlogTittle</td>
+                                    <td>@item.BlogCreateDate.ToShortDateString()</td>
+                                    <td>@item.Category.CategoryName</td>
+                                    <td>
+                                        @if (item.BlogStatus)
+                                        {
+                                            <label class="badge badge-success">Aktif</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="badge badge-secondary">Pasif</label>
+                                        }
+                                    </td>
+                                    <td>
+                                        @*<a class="btn-sm btn btn-inverse-danger" href="@Url.Action("DeleteBlog","Blog", new {id = item.BlogID})"
+                                            onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>*@
+
+                                        <a href="~/Blog/DeleteBlog/@item.BlogID" id="Sil_@item.BlogID" class="btn-sm btn btn-inverse-danger">Sil</a>
+                                        <a href="/Blog/EditBlog/@item.BlogID" class="btn-sm btn btn-inverse-info">Düzenle</a>
+                                    </td>
+                                    <script>
+                                    $('#Sil_@item.BlogID').click(function (e) {
+                                        e.preventDefault();
+                                        var linkURL = $(this).attr("href");
+                                        Swal.fire({
+                                            title: 'UYARI!',
+                                            text: "Blog yazısını silmek istediğinize emin misiniz?",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#5CBA6C',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Evet',
+                                            cancelButtonText: 'Hayır'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = linkURL;
+                                                Swal.fire(
+                                                    'Silindi!',
+                                                    'Seçilen blog silindi.',
+                                                    'success'
+                                                )
+                                            }
+                                            else if (result.dismiss === Swal.DismissReason.cancel) {
+                                            }
+                                        })
+                                    });
+                                    </script>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/Blog/BlogAdd" class="btn-lg btn btn-gradient-primary">Yeni Blog Oluştur</a>
+</div>
