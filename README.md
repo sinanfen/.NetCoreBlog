@@ -3,7 +3,7 @@ Asp .NetCore Blog Project
 <h1 align="center">150 Derste Asp.Net Core Kampı</h1>
 <h3 align="center">Blog Sitesi</h3>
 <p> Asp.Net Core 5.0 </p>
-### Blog Listesi
+### headings
 ![bloglist](https://user-images.githubusercontent.com/65792325/139154742-d20bd2c4-4a21-428a-b521-9395fb0b77d4.png)
 ### Sweet Alert
 ![sweetalert](https://user-images.githubusercontent.com/65792325/139154758-25c0ee68-f58c-4abd-b70e-e53680cbb853.png)
