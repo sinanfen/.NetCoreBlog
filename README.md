@@ -1,6 +1,6 @@
 # .NetCoreBlog
 Asp .NetCore Blog Project
-<h1 align="center">150 Derste Asp.Net Core Kampı</h1>
+<h1 align="center">Projede ASP.NET Core MVC 5.0 teknolojisi & N Tier Architecture kullanıldı.</h1>
 <h3 align="center">Blog Sitesi</h3>
 <p> Asp.Net Core 5.0 </p>
 
