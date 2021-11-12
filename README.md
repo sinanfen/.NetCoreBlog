@@ -2,7 +2,6 @@
 Asp .NetCore Blog Project
 <h2 align="center">Projede ASP.NET Core MVC 5.0 teknolojisi & N Tier Architecture kullanıldı.</h2>
 <h3 align="center">Blog Sitesi</h3>
-<p> Asp.Net Core 5.0 </p>
 
 ### Blog List
 ![bloglist](https://user-images.githubusercontent.com/65792325/139155405-fd6012f8-2ad9-4b91-b921-c4ab652a54b8.png)
