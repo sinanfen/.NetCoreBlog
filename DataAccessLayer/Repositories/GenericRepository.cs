@@ -18,6 +18,15 @@ namespace DataAccessLayer.Repositories
             c.SaveChanges();
         }
 
+        public T GetByFilter(Expression<Func<T, bool>> filter = null)
+        {
+            using var c = new Context();
+            if (filter == null)
+                return c.Set<T>().FirstOrDefault();
+            else
+                return c.Set<T>().FirstOrDefault(filter);
+        }
+
         public T GetById(int id)
         {
             using var c = new Context();
@@ -37,10 +46,14 @@ namespace DataAccessLayer.Repositories
             c.SaveChanges();
         }
 
-        public List<T> GetListAll(Expression<Func<T, bool>> filter)
+        public List<T> GetListAll(Expression<Func<T, bool>> filter = null)
         {
-            using var c = new Context();
-            return c.Set<T>().Where(filter).ToList();
+            using (var c = new Context())
+            {
+                return filter == null ?
+                    c.Set<T>().ToList() ://null ise
+                    c.Set<T>().Where(filter).ToList();//null değilse
+            }
         }
 
         public void Update(T t)

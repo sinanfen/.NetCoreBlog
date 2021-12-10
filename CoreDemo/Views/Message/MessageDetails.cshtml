@@ -1,0 +1,29 @@
+﻿@model EntityLayer.Concrete.Message2
+
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mesaj İçeriği</h4>
+
+
+            @Html.HiddenFor(x => x.MessageID)
+            <div class="form-group">
+                <label for="exampleInputName1">Mesaj Başlığı</label>
+                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(x => x.BlogTittle, "", new { @class = "text-danger" })*@
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName1">Mesaj İçeriği</label>
+                @Html.TextAreaFor(x => x.MessageDetails, 15, 4, new { @class = "form-control", disabled = "disabled" })
+                @*@Html.ValidationMessageFor(x => x.BlogTittle, "", new { @class = "text-danger" })*@
+            </div>
+            <a href="/message/inbox/" class="btn btn-gradient-primary mr-2">Tüm Mesajlar</a>
+
+        </div>
+    </div>
+</div>

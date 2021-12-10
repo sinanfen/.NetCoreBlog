@@ -22,7 +22,7 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.WriterPassword).NotEmpty().WithMessage("Şifre alanı boş bırakılamaz.")
                 .MinimumLength(6).WithMessage("En az 6 karakter girişi yapınız.")
                 .MaximumLength(32).WithMessage("En fazla 32 karakter girişi yapınız")
-                .Matches(@"[A-Z]+").WithMessage("Şifreniz en az bir BÜYÜK harf içermelidir.")
+                .Matches(@"[A-Z]+").WithMessage("Şifreniz en az bir büyük harf içermelidir.")
                 .Matches(@"[a-z]+").WithMessage("Şifreniz en az bir küçük harf içermelidir.")
                 .Matches(@"[0-9]+").WithMessage("Şifreniz en az 1 sayı içermelidir.");
                 //.Equal(x => x.WriterPasswordConfirm).WithMessage("Girdiğiniz şifreler eşleşmelidir."); //Equal kullanarak şifre ve şifre onay alanının karşılaştırılması sağlandı.
@@ -30,7 +30,7 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.WriterPasswordConfirm).NotEmpty().WithMessage("Şifre onay alanı boş bırakılamaz.")
                .MinimumLength(6).WithMessage("En az 6 karakter girişi yapınız.")
                .MaximumLength(32).WithMessage("En fazla 32 karakter girişi yapınız")
-               .Matches(@"[A-Z]+").WithMessage("Şifreniz en az bir BÜYÜK harf içermelidir.")
+               .Matches(@"[A-Z]+").WithMessage("Şifreniz en az bir büyük harf içermelidir.")
                .Matches(@"[a-z]+").WithMessage("Şifreniz en az bir küçük harf içermelidir.")
                .Matches(@"[0-9]+").WithMessage("Şifreniz en az 1 sayı içermelidir.")
                .Equal(x => x.WriterPassword).WithMessage("Girdiğiniz şifreler eşleşmelidir."); //Equal kullanarak şifre ve şifre onay alanının karşılaştırılması sağlandı.
