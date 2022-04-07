@@ -1,4 +1,4 @@
-﻿@model EntityLayer.Concrete.Writer
+﻿@model UserUpdateViewModel
 
 
 @{
@@ -11,49 +11,42 @@
         <div class="card-body">
             <h4 class="card-title">Yazar Bilgileri</h4>
             <p class="card-description">Bilgilerimi Düzenle </p>
-            @using (Html.BeginForm("EditWriterProfile", "Writer", FormMethod.Post))
-            {
-                @Html.HiddenFor(x => x.WriterID)
+            <form class="form-sample" method="post">
                 <div class="form-group">
                     <label for="exampleInputName1">Ad Soyad</label>
-                    @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
+                    <input type="text" asp-for="@Model.namesurname" class="form-control" />
+                    @*@Html.ValidationMessageFor(x => x.NameSurname, "", new { @class = "text-danger" })*@
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Kullanıcı Adı</label>
+                    <input type="text" asp-for="@Model.username" class="form-control" />
+                    @*@Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })*@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail3">E-mail</label>
-                    @Html.TextBoxFor(x => x.WriterMail, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.WriterMail, "", new { @class = "text-danger" })
+                    <input type="text" asp-for="@Model.mail" class="form-control" />
+                    @*@Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })*@
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Şifre</label>
-                    @Html.PasswordFor(x => x.WriterPassword, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.WriterPassword, "", new { @class = "text-danger" })
+                 <div class="form-group">
+                    <label for="exampleInputEmail3">Yeni Şifreniz</label>
+                    <input type="text" asp-for="@Model.password" class="form-control" />
+                    @*@Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })*@
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword4">Şifre Tekrarı</label>
-                    @Html.PasswordFor(x => x.WriterPasswordConfirm, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.WriterPasswordConfirm, "", new { @class = "text-danger" })
-                </div>
+                   <div class="form-group">
+                    <label for="exampleInputEmail3">resim yolu</label>
+                    <input type="text" asp-for="@Model.imageurl" class="form-control" />
+                    @*@Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })*@
+                </div>          
                 @*<div class="form-group">
-            <label for="exampleInputPassword4">Kategori</label>
-            @Html.DropDownListFor(x => x.WriterPasswordConfirm, (List<SelectListItem>)ViewBag.cateValues, "-Kategori Seçiniz-", new { @class = "form-control", @required = "required" })*@
-                @*@Html.ValidationMessageFor(x => x.CategoryID, "", new { @class = "text-danger" })*@
-                @*</div>*@
-                @*<div class="form-group">
-                <label>File upload</label>
-                <input type="file" name="img[]" class="file-upload-default">
-                <div class="input-group col-xs-12">
-                    <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                    <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
-                    </span>
-                </div>
-            </div>*@
-                <div class="form-group">
-                    <label for="exampleTextarea1">Hakkımda</label>
-                    @Html.TextAreaFor(x => x.WriterAbout, 20, 4, new { @class = "form-control" })
-                    @*@Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })*@
-                </div>
+                        <label>File upload</label>
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                            </span>
+                        </div>
+                    </div>*@
                 <div class="form-group">
                     <label>Görsel Yükle</label>
                     <input type="file" name="img[]" class="file-upload-default">
@@ -64,14 +57,9 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleTextarea1">Görsel</label>
-                    @Html.TextBoxFor(x => x.WriterImage, new { @class = "form-control" })
-                    @*@Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })*@
-                </div>
                 <button class="btn btn-gradient-primary mr-2">Güncelle</button>
                 <a href="/Writer/Profile" class="btn btn-light">Vazgeç</a>
-            }
+            </form>
         </div>
     </div>
 </div>

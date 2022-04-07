@@ -3,9 +3,11 @@
         <div class="row">
             <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
                 <h3>Hakkımızda</h3>
-                <p>Blog, genellikle güncelden eskiye doğru sıralanmış yazı ve yorumların yayınlandığı, web tabanlı bir yayını belirtir.
-                Çoğunlukla her gönderinin sonunda yazarın adı ve gönderi zamanı belirtilir. Yayıncının seçimine göre okuyucular yazılara yorum yapılabilir. 
-                Yorumlar, blog kültürünün çok önemli bir dinamiğidir..</p>
+                <p>
+                    Blog, genellikle güncelden eskiye doğru sıralanmış yazı ve yorumların yayınlandığı, web tabanlı bir yayını belirtir.
+                    Çoğunlukla her gönderinin sonunda yazarın adı ve gönderi zamanı belirtilir. Yayıncının seçimine göre okuyucular yazılara yorum yapılabilir.
+                    Yorumlar, blog kültürünün çok önemli bir dinamiğidir..
+                </p>
                 <div class="read">
                     <a href="/About/Index" class="btn btn-primary read-m">Devamını oku..</a>
                 </div>
@@ -16,8 +18,15 @@
             </div>
             <!-- subscribe -->
             <div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
-                <h2>Mail Bültenine Abone Olun</h2>
-                @await Html.PartialAsync("~/Views/Newsletter/SubscribeMail.cshtml")
+                <h2>Bize Ulaşın!</h2>
+                <div class="img-thumbnail">
+                    <div style="width: 100%">
+                        <iframe width="100%" height="340" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=paris+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                            <a href="https://www.gps.ie/marine-gps/">boat tracking</a>
+                        </iframe>
+                    </div>
+                </div>
+                @*@await Html.PartialAsync("~/Views/Newsletter/SubscribeMail.cshtml")*@
                 <!-- //subscribe -->
             </div>
         </div>

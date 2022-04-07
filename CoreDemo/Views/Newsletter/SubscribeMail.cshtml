@@ -14,23 +14,40 @@
 
 <script type="text/javascript">
 
-    $(function () {
-        $("#btn").click(function (e) {
-            var bolum = document.createElement("div");
-            bolum.className = "alert alert-success";
-            bolum.innerHTML = "Kayıt Başarılı";
-            document.body.appendChild(bolum);
-            e.preventDefault();
-            var veri = $("#subForm").serialize();
-            $.ajax({
-                type: "post",
-                url: "/Newsletter/SubscribeMail/",
-                data: veri,
-                success: function (f) {
-                    $("#sonuc").html(bolum);
-                    setTimeout(() => { window.location.reload() }, 3000);
-                }
+        $(function () {
+                $("#btn").click(function (e) {
+                    var bolum = document.createElement("div");
+                    bolum.className = "alert alert-success";
+                    bolum.innerHTML = "Kayıt Başarılı";
+                    document.body.appendChild(bolum);
+                    e.preventDefault();
+                    var veri = $("#subForm").serialize();
+                    $.ajax({
+                        type: "post",
+                        url: "/Newsletter/SubscribeMail/",
+                        data: veri,
+                        success: function (f) {
+                            $("#sonuc").html(bolum);
+                            setTimeout(() => { window.location.reload() }, 3000);
+                        }
+                    });
+                });
             });
+    </script>
+
+
+@*<script type="text/javascript">
+    $('#btn').click(function () {
+        let values = {
+            Mail: $("#txtmail").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Newsletter/SubscribeMail/",
+            data: values,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+            }
         });
     });
-</script>
+</script>*@

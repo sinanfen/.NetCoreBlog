@@ -18,13 +18,17 @@ namespace CoreDemo.Controllers
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
+        CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         Context c = new Context();
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
 
+        [AllowAnonymous]
         public IActionResult ReadAllBlog(int id)
         {
             ViewBag.i = id;
@@ -34,17 +38,15 @@ namespace CoreDemo.Controllers
 
         public IActionResult BlogListByWriter()
         {
-
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-            var values = bm.GetListWithCategoryByWriterBm(writerId);
+            var values = bm.GetListWithCategoryByWriterBm(writerId);         
             return View(values);
         }
 
         public void GetCategoryList()
         {
-            CategoryManager cm = new CategoryManager(new EfCategoryRepository());
-
             List<SelectListItem> categoryValues = (from x in cm.GetList()
                                                    select new SelectListItem
                                                    {
@@ -65,7 +67,8 @@ namespace CoreDemo.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog blog)
         {
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(blog);
@@ -108,7 +111,8 @@ namespace CoreDemo.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog blog)
         {
-            var userMail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             GetCategoryList();
             blog.WriterID = writerId;

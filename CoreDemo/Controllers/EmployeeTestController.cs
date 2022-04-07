@@ -20,6 +20,7 @@ namespace CoreDemo.Controllers
             return View(values);
         }
 
+        [HttpGet]
         public IActionResult AddEmployee()
         {
             return View();
@@ -31,12 +32,52 @@ namespace CoreDemo.Controllers
             var httpClient = new HttpClient();
             var jsonEmployee = JsonConvert.SerializeObject(class1);
             StringContent content = new StringContent(jsonEmployee, Encoding.UTF8, "application/json");
-            var responseMessage = await httpClient.PostAsync("https://localhost:44342/api/Default",content);
+            var responseMessage = await httpClient.PostAsync("https://localhost:44342/api/Default", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
             return View(class1);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditEmployee(int id)
+        {
+            var httpClient = new HttpClient();
+            var responseMessage = await httpClient.GetAsync("https://localhost:44342/api/Default/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonEmployee = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<Class1>(jsonEmployee);
+                return View(values);
+            }
+            return RedirectToAction("index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditEmployee(Class1 p)
+        {
+            var httpClient = new HttpClient();
+            var jsonEmployee = JsonConvert.SerializeObject(p);
+            var content = new StringContent(jsonEmployee, Encoding.UTF8, "application/json");
+            var responseMessage = await httpClient.PutAsync("https://localhost:44342/api/Default", content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("index");
+            }
+            return View(p);
+        }
+
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var httpClient = new HttpClient();
+            var responseMessage = await httpClient.DeleteAsync("https://localhost:44342/api/Default/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+
         }
     }
 

@@ -1,3 +1,7 @@
+using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -26,8 +30,14 @@ namespace CoreDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>(x =>
+            {
+                x.Password.RequireUppercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews();
-
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -41,10 +51,24 @@ namespace CoreDemo
                 CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(x =>
                 {
-                    x.LoginPath = "/Login/Index";
+                    x.LoginPath = "/Login/Index/";
                 }
                 );
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                //Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+
+                options.LoginPath = "/Login/Index/";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddControllersWithViews().AddFluentValidation(x =>
+           x.RegisterValidatorsFromAssemblyContaining<BlogValidator>());
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,10 +97,15 @@ namespace CoreDemo
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                name: "areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                endpoints.MapAreaControllerRoute(
+                name: "Admin",
+                areaName: "Admin",
+                pattern: "/admin/{controller=Home}/{action=Index}/{id?}");
+
+                // endpoints.MapControllerRoute(
+                //name: "areas",
+                //pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+
 
                 endpoints.MapControllerRoute(
                 name: "default",
